@@ -3,121 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absolute Dashboard | Otomatik Erişim</title>
-    
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc, updateDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyC29HXKSTcXx5-BuLrt6h8iH4BUh3jnNes",
-            authDomain: "absolutebisite.firebaseapp.com",
-            projectId: "absolutebisite",
-            storageBucket: "absolutebisite.firebasestorage.app",
-            messagingSenderId: "648450986989",
-            appId: "1:648450986989:web:17ff5e9a4ffd1577354de4",
-            measurementId: "G-EXPBEZ198Z"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        const MAIN_ADMIN = "kuzeymurt00@gmail.com";
-        const ANA_SITE_URL = "https://kuzeymurt00-blip.github.io/Website/";
-
-        onAuthStateChanged(auth, async (user) => {
-            const loadingText = document.getElementById('loading-text');
-
-            if (user) {
-                loadingText.innerText = "Kimlik doğrulanıyor...";
-                
-                try {
-                    const userDocRef = doc(db, "users", user.uid);
-                    const userDoc = await getDoc(userDocRef);
-                    
-                    if (userDoc.exists()) {
-                        showApp(user, userDoc.data());
-                    } else {
-                        // Eğer döküman yoksa otomatik oluştur (Hata almamak için)
-                        const newData = { email: user.email, level: 1, xp: 0, role: (user.email === MAIN_ADMIN ? "admin" : "user") };
-                        await setDoc(userDocRef, newData);
-                        showApp(user, newData);
-                    }
-                } catch (error) {
-                    console.error("Hata:", error);
-                    loadingText.innerText = "Hata: Firebase Kurallarını (Rules) kontrol edin!";
-                }
-            } else {
-                loadingText.innerText = "Oturum bulunamadı. Yönlendiriliyorsunuz...";
-                setTimeout(() => { window.location.href = ANA_SITE_URL; }, 2000);
-            }
-        });
-
-        function showApp(user, data) {
-            document.getElementById('loading-screen').style.display = 'none';
-            document.getElementById('app-content').style.display = 'block';
-            
-            document.getElementById('user-display').innerText = `Karakter: ${user.email.split('@')[0].toUpperCase()}`;
-            document.getElementById('level-display').innerText = `Seviye: ${data.level || 1}`;
-            document.getElementById('xp-fill').style.width = (data.xp || 0) + "%";
-
-            if (data.role === "admin" || user.email === MAIN_ADMIN) {
-                document.getElementById('admin-tools').style.display = 'block';
-            }
+    <title>Absolute Level Up | Görev Sistemi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --absolute-bg: #0d1117;
+            --absolute-card: #161b22;
+            --absolute-border: #30363d;
+            --absolute-blue: #6366f1;
+            --absolute-text: #c9d1d9;
+            --absolute-gold: #d29922;
         }
 
-        window.makeAdmin = async () => {
-            const email = document.getElementById('target-email').value.trim();
-            if(!email) return;
+        body { background-color: var(--absolute-bg); color: var(--absolute-text); font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        
+        /* Dashboard Kartı */
+        .glass-panel { background: var(--absolute-card); border: 1px solid var(--absolute-border); border-radius: 12px; padding: 30px; width: 90%; max-width: 500px; margin-top: 40px; }
+        
+        /* XP Bar */
+        .xp-container { background: #21262d; height: 15px; border-radius: 10px; margin: 20px 0; overflow: hidden; border: 1px solid var(--absolute-border); }
+        #xp-fill { background: linear-gradient(90deg, var(--absolute-blue), #a855f7); width: 0%; height: 100%; transition: 1s ease; }
 
-            try {
-                const q = query(collection(db, "users"), where("email", "==", email));
-                const querySnapshot = await getDocs(q);
-
-                if (querySnapshot.empty) {
-                    alert("Kullanıcı bulunamadı! (Kullanıcının Firestore'da 'email' alanı kayıtlı olmalı)");
-                    return;
-                }
-
-                querySnapshot.forEach(async (uDoc) => {
-                    await updateDoc(doc(db, "users", uDoc.id), { role: "admin" });
-                    alert(email + " artık yetkili!");
-                });
-            } catch (e) { alert("Yetki verme hatası: " + e.message); }
-        };
-    </script>
-
-    <style>
-        body { margin: 0; background: #0a0a0c; color: #e2e8f0; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .card { background: #121217; border: 1px solid #27272a; padding: 2rem; border-radius: 20px; width: 380px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
-        .xp-container { background: #27272a; height: 12px; border-radius: 6px; margin: 20px 0; overflow: hidden; }
-        #xp-fill { background: linear-gradient(90deg, #3b82f6, #8b5cf6); width: 0%; height: 100%; transition: 1s ease-out; }
-        .admin-panel { margin-top: 25px; padding: 15px; border: 1px dashed #fbbf24; border-radius: 12px; display: none; background: rgba(251, 191, 36, 0.05); }
-        input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #3f3f46; background: #09090b; color: white; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; border-radius: 8px; border: none; background: #3b82f6; color: white; font-weight: bold; cursor: pointer; }
-        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #3b82f6; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* Görev Listesi */
+        .quest-item { background: #0d1117; border: 1px solid var(--absolute-border); padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        
+        button { cursor: pointer; border-radius: 8px; border: 1px solid var(--absolute-border); padding: 10px 20px; font-weight: 600; font-family: inherit; transition: 0.2s; }
+        .btn-primary { background: var(--absolute-blue); color: white; border: none; }
+        .btn-primary:hover { opacity: 0.8; }
+        
+        .hidden { display: none !important; }
+        #loading-screen { margin-top: 100px; font-size: 1.2rem; color: var(--absolute-blue); }
     </style>
 </head>
 <body>
-    <div id="loading-screen" class="card">
-        <div class="loader"></div>
-        <p id="loading-text">Oturum kontrol ediliyor...</p>
-    </div>
 
-    <div id="app-content" class="card" style="display:none;">
-        <h2 id="user-display">---</h2>
-        <h4 id="level-display" style="color: #a1a1aa;">Seviye: 1</h4>
-        <div class="xp-container"><div id="xp-fill"></div></div>
+<div id="loading-screen">Sistem Senkronize Ediliyor...</div>
 
-        <div id="admin-tools" class="admin-panel">
-            <h5 style="color: #fbbf24; margin: 0;">ADMİN KONTROLÜ</h5>
-            <input type="text" id="target-email" placeholder="Admin yapılacak e-posta">
-            <button onclick="makeAdmin()" style="background: #fbbf24; color: black;">YETKİYİ ONAYLA</button>
+<div id="main-content" class="hidden">
+    <div class="glass-panel">
+        <h2 style="margin-top:0;">⚔️ <span id="display-name" style="color:var(--absolute-blue)">Karakter</span></h2>
+        <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
+            <span>Seviye: <b id="lvl-text">1</b></span>
+            <span>XP: <b id="xp-text">0/100</b></span>
         </div>
-        <p style="font-size: 0.8rem; color: #52525b; margin-top: 20px;">Absolute Veritabanı Aktif.</p>
+        <div class="xp-container">
+            <div id="xp-fill"></div>
+        </div>
+
+        <h3 style="border-bottom: 1px solid var(--absolute-border); padding-bottom: 10px;">Aktif Görevler</h3>
+        <div id="quest-list">
+            </div>
+
+        <div style="margin-top:20px;">
+            <input type="text" id="quest-input" style="width:100%; padding:10px; background:#0d1117; border:1px solid var(--absolute-border); color:white; border-radius:8px;" placeholder="Yeni görev yaz...">
+            <button onclick="addQuest()" class="btn-primary" style="width:100%; margin-top:10px;">GÖREV EKLE</button>
+        </div>
+
+        <button onclick="location.href='https://kuzeymurt00-blip.github.io/Website/'" style="width:100%; margin-top:20px; background:transparent; color:gray;">Ana Sayfaya Dön</button>
     </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyC29HXKSTcXx5-BuLrt6h8iH4BUh3jnNes",
+        authDomain: "absolutebisite.firebaseapp.com",
+        projectId: "absolutebisite",
+        storageBucket: "absolutebisite.firebasestorage.app",
+        messagingSenderId: "648450986989",
+        appId: "1:648450986989:web:17ff5e9a4ffd1577354de4",
+        measurementId: "G-EXPBEZ198Z"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let userUID = null;
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            userUID = user.uid;
+            // Emoji Hub'daki gibi all_users'dan isim çekiyoruz
+            const userDoc = await getDoc(doc(db, "all_users", user.uid));
+            const username = userDoc.exists() ? userDoc.data().username : user.email.split('@')[0];
+            document.getElementById('display-name').innerText = username.toUpperCase();
+
+            // Görev verilerini "user_stats" koleksiyonunda tutalım (Karışmasın diye)
+            loadStats(user.uid);
+            document.getElementById('loading-screen').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+        } else {
+            window.location.href = "https://kuzeymurt00-blip.github.io/Website/";
+        }
+    });
+
+    function loadStats(uid) {
+        onSnapshot(doc(db, "user_stats", uid), (snap) => {
+            if (snap.exists()) {
+                const data = snap.data();
+                document.getElementById('lvl-text').innerText = data.level || 1;
+                document.getElementById('xp-text').innerText = `${data.xp || 0} / 100`;
+                document.getElementById('xp-fill').style.width = (data.xp || 0) + "%";
+                
+                // Görevleri listele
+                renderQuests(data.quests || []);
+            } else {
+                // Veri yoksa oluştur
+                setDoc(doc(db, "user_stats", uid), { level: 1, xp: 0, quests: [] });
+            }
+        });
+    }
+
+    function renderQuests(quests) {
+        const list = document.getElementById('quest-list');
+        list.innerHTML = quests.length === 0 ? "<p style='color:gray'>Henüz görev yok.</p>" : "";
+        quests.forEach((q, index) => {
+            const div = document.createElement('div');
+            div.className = 'quest-item';
+            div.innerHTML = `<span>${q}</span> <button onclick="completeQuest(${index})" class="btn-primary" style="padding:5px 10px; font-size:0.8rem;">TAMAMLA</button>`;
+            list.appendChild(div);
+        });
+    }
+
+    window.addQuest = async () => {
+        const input = document.getElementById('quest-input');
+        if (!input.value) return;
+        const userRef = doc(db, "user_stats", userUID);
+        const snap = await getDoc(userRef);
+        let currentQuests = snap.data().quests || [];
+        currentQuests.push(input.value);
+        await updateDoc(userRef, { quests: currentQuests });
+        input.value = "";
+    };
+
+    window.completeQuest = async (index) => {
+        const userRef = doc(db, "user_stats", userUID);
+        const snap = await getDoc(userRef);
+        let data = snap.data();
+        let currentQuests = data.quests;
+        currentQuests.splice(index, 1); // Görevi sil
+
+        let newXP = (data.xp || 0) + 20;
+        let newLevel = data.level || 1;
+
+        if (newXP >= 100) {
+            newXP = 0;
+            newLevel++;
+            alert("LEVEL UP! Yeni Seviye: " + newLevel);
+        }
+
+        await updateDoc(userRef, { 
+            quests: currentQuests,
+            xp: newXP,
+            level: newLevel
+        });
+    };
+</script>
 </body>
 </html>
