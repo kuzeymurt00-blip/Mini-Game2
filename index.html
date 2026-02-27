@@ -12,61 +12,61 @@
             --absolute-border: #30363d;
             --absolute-blue: #6366f1;
             --absolute-text: #c9d1d9;
-            --absolute-gold: #d29922;
         }
 
-        body { background-color: var(--absolute-bg); color: var(--absolute-text); font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        body { background-color: var(--absolute-bg); color: var(--absolute-text); font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; justify-content: center; }
+        .glass-panel { background: var(--absolute-card); border: 1px solid var(--absolute-border); border-radius: 12px; padding: 30px; width: 90%; max-width: 450px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
-        /* Dashboard Kartı */
-        .glass-panel { background: var(--absolute-card); border: 1px solid var(--absolute-border); border-radius: 12px; padding: 30px; width: 90%; max-width: 500px; margin-top: 40px; }
+        /* XP Bar Tasarımı */
+        .xp-bar { background: #21262d; height: 14px; border-radius: 10px; margin: 20px 0; overflow: hidden; border: 1px solid var(--absolute-border); position: relative; }
+        #xp-fill { background: linear-gradient(90deg, var(--absolute-blue), #818cf8); width: 0%; height: 100%; transition: 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
         
-        /* XP Bar */
-        .xp-container { background: #21262d; height: 15px; border-radius: 10px; margin: 20px 0; overflow: hidden; border: 1px solid var(--absolute-border); }
-        #xp-fill { background: linear-gradient(90deg, var(--absolute-blue), #a855f7); width: 0%; height: 100%; transition: 1s ease; }
+        .quest-item { background: #0d1117; border: 1px solid var(--absolute-border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Görev Listesi */
-        .quest-item { background: #0d1117; border: 1px solid var(--absolute-border); padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        input { width: 100%; padding: 12px; background: #0d1117; border: 1px solid var(--absolute-border); color: white; border-radius: 8px; margin-bottom: 10px; box-sizing: border-box; outline: none; }
+        input:focus { border-color: var(--absolute-blue); }
+        button { width: 100%; padding: 12px; border-radius: 8px; border: none; background: var(--absolute-blue); color: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        button:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-finish { width: auto; padding: 6px 12px; font-size: 0.75rem; background: #238636; }
         
-        button { cursor: pointer; border-radius: 8px; border: 1px solid var(--absolute-border); padding: 10px 20px; font-weight: 600; font-family: inherit; transition: 0.2s; }
-        .btn-primary { background: var(--absolute-blue); color: white; border: none; }
-        .btn-primary:hover { opacity: 0.8; }
-        
+        #loading-screen { text-align: center; }
         .hidden { display: none !important; }
-        #loading-screen { margin-top: 100px; font-size: 1.2rem; color: var(--absolute-blue); }
+        .status-msg { color: #8b949e; font-size: 0.85rem; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<div id="loading-screen">Sistem Senkronize Ediliyor...</div>
+<div id="loading-screen">
+    <div style="font-size: 1.8rem; font-weight: 800; letter-spacing: -1px;">ABSOLUTE <span style="color:var(--absolute-blue)">LEVEL</span></div>
+    <p id="loading-text">Veritabanına bağlanılıyor...</p>
+</div>
 
 <div id="main-content" class="hidden">
     <div class="glass-panel">
-        <h2 style="margin-top:0;">⚔️ <span id="display-name" style="color:var(--absolute-blue)">Karakter</span></h2>
-        <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
-            <span>Seviye: <b id="lvl-text">1</b></span>
-            <span>XP: <b id="xp-text">0/100</b></span>
+        <h2 id="user-name" style="margin:0; color:white; font-weight: 800;">KARAKTER</h2>
+        <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:0.85rem; font-weight: 600;">
+            <span id="level-label">Seviye 1</span>
+            <span id="xp-label">0% XP</span>
         </div>
-        <div class="xp-container">
-            <div id="xp-fill"></div>
-        </div>
+        <div class="xp-bar"><div id="xp-fill"></div></div>
 
-        <h3 style="border-bottom: 1px solid var(--absolute-border); padding-bottom: 10px;">Aktif Görevler</h3>
-        <div id="quest-list">
+        <div id="quest-list" style="text-align: left; margin-top: 25px; max-height: 250px; overflow-y: auto;">
             </div>
 
-        <div style="margin-top:20px;">
-            <input type="text" id="quest-input" style="width:100%; padding:10px; background:#0d1117; border:1px solid var(--absolute-border); color:white; border-radius:8px;" placeholder="Yeni görev yaz...">
-            <button onclick="addQuest()" class="btn-primary" style="width:100%; margin-top:10px;">GÖREV EKLE</button>
+        <div style="margin-top:25px; padding-top: 20px; border-top: 1px solid var(--absolute-border);">
+            <input type="text" id="quest-input" placeholder="Yeni bir görev tanımla...">
+            <button onclick="addNewQuest()">GÖREVİ LİSTEYE EKLE</button>
         </div>
-
-        <button onclick="location.href='https://kuzeymurt00-blip.github.io/Website/'" style="width:100%; margin-top:20px; background:transparent; color:gray;">Ana Sayfaya Dön</button>
+        
+        <button onclick="location.href='https://kuzeymurt00-blip.github.io/Website/'" style="background:none; color:#8b949e; font-size:0.8rem; margin-top:15px; border:1px solid #30363d; height: 35px; padding: 0;">Siteden Çıkış Yap</button>
     </div>
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyC29HXKSTcXx5-BuLrt6h8iH4BUh3jnNes",
@@ -82,82 +82,88 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    let userUID = null;
-
     onAuthStateChanged(auth, async (user) => {
         if (user) {
-            userUID = user.uid;
-            // Emoji Hub'daki gibi all_users'dan isim çekiyoruz
-            const userDoc = await getDoc(doc(db, "all_users", user.uid));
-            const username = userDoc.exists() ? userDoc.data().username : user.email.split('@')[0];
-            document.getElementById('display-name').innerText = username.toUpperCase();
+            try {
+                // 1. Kullanıcı adını 'all_users' koleksiyonundan oku
+                const nameDoc = await getDoc(doc(db, "all_users", user.uid));
+                const username = nameDoc.exists() ? nameDoc.data().username : user.email.split('@')[0];
+                document.getElementById('user-name').innerText = username.toUpperCase();
 
-            // Görev verilerini "user_stats" koleksiyonunda tutalım (Karışmasın diye)
-            loadStats(user.uid);
-            document.getElementById('loading-screen').classList.add('hidden');
-            document.getElementById('main-content').classList.remove('hidden');
+                // 2. XP ve Görevleri yeni 'user_stats' koleksiyonundan takip et
+                const statsRef = doc(db, "user_stats", user.uid);
+                
+                onSnapshot(statsRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        renderUI(docSnap.data());
+                    } else {
+                        // Eğer bu kullanıcı için 'user_stats' dökümanı yoksa oluştur
+                        setDoc(statsRef, { level: 1, xp: 0, quests: [], email: user.email });
+                    }
+                    // Yükleme ekranını kapat
+                    document.getElementById('loading-screen').classList.add('hidden');
+                    document.getElementById('main-content').classList.remove('hidden');
+                });
+
+            } catch (err) {
+                document.getElementById('loading-text').innerText = "Hata: " + err.message;
+            }
         } else {
             window.location.href = "https://kuzeymurt00-blip.github.io/Website/";
         }
     });
 
-    function loadStats(uid) {
-        onSnapshot(doc(db, "user_stats", uid), (snap) => {
-            if (snap.exists()) {
-                const data = snap.data();
-                document.getElementById('lvl-text').innerText = data.level || 1;
-                document.getElementById('xp-text').innerText = `${data.xp || 0} / 100`;
-                document.getElementById('xp-fill').style.width = (data.xp || 0) + "%";
-                
-                // Görevleri listele
-                renderQuests(data.quests || []);
-            } else {
-                // Veri yoksa oluştur
-                setDoc(doc(db, "user_stats", uid), { level: 1, xp: 0, quests: [] });
-            }
-        });
-    }
-
-    function renderQuests(quests) {
+    function renderUI(data) {
+        const lvl = data.level || 1;
+        const xp = data.xp || 0;
+        document.getElementById('level-label').innerText = "Seviye " + lvl;
+        document.getElementById('xp-label').innerText = xp + "% XP";
+        document.getElementById('xp-fill').style.width = xp + "%";
+        
         const list = document.getElementById('quest-list');
-        list.innerHTML = quests.length === 0 ? "<p style='color:gray'>Henüz görev yok.</p>" : "";
-        quests.forEach((q, index) => {
+        list.innerHTML = "";
+        const quests = data.quests || [];
+        
+        if(quests.length === 0) {
+            list.innerHTML = "<p style='color:gray; text-align:center; font-size:0.8rem;'>Şu an aktif bir görevin yok.</p>";
+        }
+
+        quests.forEach((q, i) => {
             const div = document.createElement('div');
             div.className = 'quest-item';
-            div.innerHTML = `<span>${q}</span> <button onclick="completeQuest(${index})" class="btn-primary" style="padding:5px 10px; font-size:0.8rem;">TAMAMLA</button>`;
+            div.innerHTML = `<span>${q}</span> <button class="btn-finish" onclick="finishQuest('${q}')">BİTİR</button>`;
             list.appendChild(div);
         });
     }
 
-    window.addQuest = async () => {
+    // YENİ GÖREV EKLEME
+    window.addNewQuest = async () => {
         const input = document.getElementById('quest-input');
-        if (!input.value) return;
-        const userRef = doc(db, "user_stats", userUID);
-        const snap = await getDoc(userRef);
-        let currentQuests = snap.data().quests || [];
-        currentQuests.push(input.value);
-        await updateDoc(userRef, { quests: currentQuests });
+        if(!input.value) return;
+        const ref = doc(db, "user_stats", auth.currentUser.uid);
+        await updateDoc(ref, {
+            quests: arrayUnion(input.value)
+        });
         input.value = "";
     };
 
-    window.completeQuest = async (index) => {
-        const userRef = doc(db, "user_stats", userUID);
-        const snap = await getDoc(userRef);
-        let data = snap.data();
-        let currentQuests = data.quests;
-        currentQuests.splice(index, 1); // Görevi sil
-
-        let newXP = (data.xp || 0) + 20;
+    // GÖREV BİTİRME VE XP KAZANMA
+    window.finishQuest = async (questText) => {
+        const ref = doc(db, "user_stats", auth.currentUser.uid);
+        const snap = await getDoc(ref);
+        const data = snap.data();
+        
+        let newXP = (data.xp || 0) + 20; // Her görev 20 XP verir
         let newLevel = data.level || 1;
 
-        if (newXP >= 100) {
+        if(newXP >= 100) {
             newXP = 0;
             newLevel++;
-            alert("LEVEL UP! Yeni Seviye: " + newLevel);
+            alert("TEBRİKLER! Seviye Atladın: " + newLevel);
         }
 
-        await updateDoc(userRef, { 
-            quests: currentQuests,
+        await updateDoc(ref, {
+            quests: arrayRemove(questText),
             xp: newXP,
             level: newLevel
         });
