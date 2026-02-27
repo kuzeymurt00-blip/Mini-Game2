@@ -10,7 +10,6 @@
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
         import { getFirestore, doc, getDoc, updateDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        // Senin Firebase Bilgilerin
         const firebaseConfig = {
             apiKey: "AIzaSyC29HXKSTcXx5-BuLrt6h8iH4BUh3jnNes",
             authDomain: "absolutebisite.firebaseapp.com",
@@ -28,31 +27,31 @@
         const MAIN_ADMIN = "kuzeymurt00@gmail.com";
         const ANA_SITE_URL = "https://kuzeymurt00-blip.github.io/Website/";
 
-        // OTOMATİK OTURUM KONTROLÜ
         onAuthStateChanged(auth, async (user) => {
             const loadingText = document.getElementById('loading-text');
 
             if (user) {
-                loadingText.innerText = "Kimlik doğrulanıyor, lütfen bekleyin...";
+                loadingText.innerText = "Kimlik doğrulanıyor...";
                 
-                // Firestore'dan kullanıcının rolünü ve bilgilerini çek
-                const userDocRef = doc(db, "users", user.uid);
-                const userDoc = await getDoc(userDocRef);
-                
-                if (userDoc.exists()) {
-                    const data = userDoc.data();
-                    showApp(user, data);
-                } else {
-                    // Kullanıcı auth'da var ama veritabanında yoksa erişim engelle
-                    alert("Erişim Reddedildi: Veritabanı kaydı bulunamadı.");
-                    window.location.href = ANA_SITE_URL;
+                try {
+                    const userDocRef = doc(db, "users", user.uid);
+                    const userDoc = await getDoc(userDocRef);
+                    
+                    if (userDoc.exists()) {
+                        showApp(user, userDoc.data());
+                    } else {
+                        // Eğer döküman yoksa otomatik oluştur (Hata almamak için)
+                        const newData = { email: user.email, level: 1, xp: 0, role: (user.email === MAIN_ADMIN ? "admin" : "user") };
+                        await setDoc(userDocRef, newData);
+                        showApp(user, newData);
+                    }
+                } catch (error) {
+                    console.error("Hata:", error);
+                    loadingText.innerText = "Hata: Firebase Kurallarını (Rules) kontrol edin!";
                 }
             } else {
-                // Giriş yapmamışsa ana siteye geri gönder
-                loadingText.innerText = "Oturum bulunamadı. Ana siteye yönlendiriliyorsunuz...";
-                setTimeout(() => {
-                    window.location.href = ANA_SITE_URL;
-                }, 2000);
+                loadingText.innerText = "Oturum bulunamadı. Yönlendiriliyorsunuz...";
+                setTimeout(() => { window.location.href = ANA_SITE_URL; }, 2000);
             }
         });
 
@@ -64,34 +63,34 @@
             document.getElementById('level-display').innerText = `Seviye: ${data.level || 1}`;
             document.getElementById('xp-fill').style.width = (data.xp || 0) + "%";
 
-            // Admin Yetkisi Kontrolü
             if (data.role === "admin" || user.email === MAIN_ADMIN) {
                 document.getElementById('admin-tools').style.display = 'block';
             }
         }
 
-        // Admin Yapma Fonksiyonu
         window.makeAdmin = async () => {
             const email = document.getElementById('target-email').value.trim();
             if(!email) return;
 
-            const q = query(collection(db, "users"), where("email", "==", email));
-            const querySnapshot = await getDocs(q);
+            try {
+                const q = query(collection(db, "users"), where("email", "==", email));
+                const querySnapshot = await getDocs(q);
 
-            if (querySnapshot.empty) {
-                alert("Kullanıcı bulunamadı!");
-                return;
-            }
+                if (querySnapshot.empty) {
+                    alert("Kullanıcı bulunamadı! (Kullanıcının Firestore'da 'email' alanı kayıtlı olmalı)");
+                    return;
+                }
 
-            querySnapshot.forEach(async (uDoc) => {
-                await updateDoc(doc(db, "users", uDoc.id), { role: "admin" });
-                alert(email + " artık yetkili!");
-            });
+                querySnapshot.forEach(async (uDoc) => {
+                    await updateDoc(doc(db, "users", uDoc.id), { role: "admin" });
+                    alert(email + " artık yetkili!");
+                });
+            } catch (e) { alert("Yetki verme hatası: " + e.message); }
         };
     </script>
 
     <style>
-        body { margin: 0; background: #0a0a0c; color: #e2e8f0; font-family: 'Orbitron', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        body { margin: 0; background: #0a0a0c; color: #e2e8f0; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         .card { background: #121217; border: 1px solid #27272a; padding: 2rem; border-radius: 20px; width: 380px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
         .xp-container { background: #27272a; height: 12px; border-radius: 6px; margin: 20px 0; overflow: hidden; }
         #xp-fill { background: linear-gradient(90deg, #3b82f6, #8b5cf6); width: 0%; height: 100%; transition: 1s ease-out; }
@@ -103,7 +102,6 @@
     </style>
 </head>
 <body>
-
     <div id="loading-screen" class="card">
         <div class="loader"></div>
         <p id="loading-text">Oturum kontrol ediliyor...</p>
@@ -112,21 +110,14 @@
     <div id="app-content" class="card" style="display:none;">
         <h2 id="user-display">---</h2>
         <h4 id="level-display" style="color: #a1a1aa;">Seviye: 1</h4>
-        
-        <div class="xp-container">
-            <div id="xp-fill"></div>
-        </div>
+        <div class="xp-container"><div id="xp-fill"></div></div>
 
         <div id="admin-tools" class="admin-panel">
             <h5 style="color: #fbbf24; margin: 0;">ADMİN KONTROLÜ</h5>
             <input type="text" id="target-email" placeholder="Admin yapılacak e-posta">
             <button onclick="makeAdmin()" style="background: #fbbf24; color: black;">YETKİYİ ONAYLA</button>
         </div>
-
-        <p style="font-size: 0.8rem; color: #52525b; margin-top: 20px;">
-            Absolute Veritabanı ile senkronize çalışıyor.
-        </p>
+        <p style="font-size: 0.8rem; color: #52525b; margin-top: 20px;">Absolute Veritabanı Aktif.</p>
     </div>
-
 </body>
 </html>
