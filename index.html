@@ -3,58 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absolute System | Admin Kontrollü XP</title>
+    <title>Absolute System | Global Görevler</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --blue: #6366f1; --text: #c9d1d9; --green: #238636; }
+        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --blue: #6366f1; --text: #c9d1d9; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; justify-content: center; }
-        .glass-panel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 30px; width: 90%; max-width: 450px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .xp-bar { background: #21262d; height: 14px; border-radius: 10px; margin: 20px 0; overflow: hidden; border: 1px solid var(--border); position: relative; }
+        .glass-panel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 30px; width: 90%; max-width: 450px; text-align: center; }
+        .xp-bar { background: #21262d; height: 14px; border-radius: 10px; margin: 20px 0; overflow: hidden; border: 1px solid var(--border); }
         #xp-fill { background: linear-gradient(90deg, var(--blue), #818cf8); width: 0%; height: 100%; transition: 1.5s ease; }
         .quest-item { background: #0d1117; border: 1px solid var(--border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
         .admin-panel { margin-top: 20px; padding: 15px; border: 1px dashed var(--blue); border-radius: 10px; background: rgba(99, 102, 241, 0.05); }
         input { width: 100%; padding: 12px; background: #0d1117; border: 1px solid var(--border); color: white; border-radius: 8px; margin-bottom: 10px; box-sizing: border-box; }
         button { width: 100%; padding: 12px; border-radius: 8px; border: none; background: var(--blue); color: white; font-weight: bold; cursor: pointer; }
-        .btn-finish:disabled { background: #30363d; cursor: not-allowed; opacity: 0.5; }
+        button:disabled { background: #30363d; opacity: 0.5; cursor: not-allowed; }
         .hidden { display: none !important; }
-        #cooldown-timer { font-size: 0.8rem; color: #f85149; margin-top: 5px; font-weight: 600; }
     </style>
 </head>
 <body>
 
-<div id="loading-screen">
-    <div style="font-size: 1.8rem; font-weight: 800;">ABSOLUTE <span style="color:var(--blue)">SYSTEM</span></div>
-    <p id="loading-text">Yetkiler kontrol ediliyor...</p>
-</div>
-
-<div id="main-content" class="hidden">
+<div id="main-content">
     <div class="glass-panel">
-        <h2 id="user-name" style="margin:0; color:white;">KARAKTER</h2>
+        <h2 id="user-name" style="margin:0; color:white;">YÜKLENİYOR...</h2>
         <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:0.85rem;">
             <span id="level-label">Seviye 1</span>
             <span id="xp-label">0% XP</span>
         </div>
         <div class="xp-bar"><div id="xp-fill"></div></div>
 
-        <div id="cooldown-timer" class="hidden">Sistem kilitli: Yeni görev için beklemelisin.</div>
-
         <div id="quest-list" style="text-align: left; margin-top: 25px;"></div>
 
         <div id="admin-area" class="hidden admin-panel">
-            <h4 style="margin:0 0 10px 0; color:var(--blue);">👑 YÖNETİCİ PANELİ</h4>
-            <input type="text" id="target-uid" placeholder="Hedef Kullanıcı UID">
-            <input type="text" id="quest-input" placeholder="Atanacak Görev...">
-            <button onclick="adminAddQuest()">GÖREVİ TANIMLA</button>
+            <h4 style="margin:0 0 10px 0; color:var(--blue);">👑 GLOBAL ADMIN PANELİ</h4>
+            <input type="text" id="quest-input" placeholder="TÜM OYUNCULARA GİDECEK GÖREV...">
+            <button onclick="publishGlobalQuest()">HERKESE YAYINLA</button>
         </div>
-        
-        <button onclick="location.href='https://kuzeymurt00-blip.github.io/Website/'" style="background:none; color:gray; font-size:0.8rem; margin-top:15px; border:1px solid #333;">Ana Sayfaya Dön</button>
     </div>
 </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, arrayUnion } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyC29HXKSTcXx5-BuLrt6h8iH4BUh3jnNes",
@@ -70,103 +59,96 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    let userStats = {};
+
     onAuthStateChanged(auth, async (user) => {
-        if (!user) { window.location.href = "https://kuzeymurt00-blip.github.io/Website/"; return; }
+        if (!user) return;
 
-        try {
-            // 1. Kullanıcı Bilgileri
-            const nameDoc = await getDoc(doc(db, "all_users", user.uid));
-            document.getElementById('user-name').innerText = (nameDoc.exists() ? nameDoc.data().username : "OYUNCU").toUpperCase();
+        // Admin Kontrolü
+        const adminDoc = await getDoc(doc(db, "admins", user.email));
+        if (adminDoc.exists() || user.email === "kuzeymurt00@gmail.com") {
+            document.getElementById('admin-area').classList.remove('hidden');
+        }
 
-            // 2. Admin Kontrolü (admins koleksiyonuna bakıyoruz)
-            const adminDoc = await getDoc(doc(db, "admins", user.email));
-            if (adminDoc.exists() || user.email === "kuzeymurt00@gmail.com") {
-                document.getElementById('admin-area').classList.remove('hidden');
+        // Kullanıcı Adı
+        const nameDoc = await getDoc(doc(db, "all_users", user.uid));
+        document.getElementById('user-name').innerText = (nameDoc.exists() ? nameDoc.data().username : "OYUNCU").toUpperCase();
+
+        // Kişisel İstatistikleri Takip Et
+        onSnapshot(doc(db, "user_stats", user.uid), (snap) => {
+            if (snap.exists()) {
+                userStats = snap.data();
+                renderUI();
+            } else {
+                setDoc(doc(db, "user_stats", user.uid), { level: 1, xp: 0, completedGlobal: [], lastFinish: 0 });
             }
+        });
 
-            // 3. Veri Takibi
-            const statsRef = doc(db, "user_stats", user.uid);
-            onSnapshot(statsRef, (snap) => {
-                if (snap.exists()) {
-                    checkCooldown(snap.data());
-                    renderUI(snap.data());
-                } else {
-                    setDoc(statsRef, { level: 1, xp: 0, quests: [], lastFinish: 0 });
-                }
-                document.getElementById('loading-screen').classList.add('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
-            });
-
-        } catch (err) { console.error(err); }
+        // GLOBAL GÖREVLERİ TAKİP ET (Sihirli kısım burası!)
+        onSnapshot(doc(db, "global_settings", "quests"), (snap) => {
+            if (snap.exists()) renderUI(snap.data().list);
+        });
     });
 
-    function checkCooldown(data) {
-        const lastFinish = data.lastFinish || 0;
-        const now = Date.now();
-        const diff = now - lastFinish;
-        const dayInMs = 24 * 60 * 60 * 1000;
-
-        const timer = document.getElementById('cooldown-timer');
-        if (diff < dayInMs) {
-            timer.classList.remove('hidden');
-            return true; // Cooldown aktif
-        } else {
-            timer.classList.add('hidden');
-            return false;
-        }
-    }
-
-    function renderUI(data) {
-        document.getElementById('level-label').innerText = "Seviye " + (data.level || 1);
-        document.getElementById('xp-label').innerText = (data.xp || 0) + "% XP";
-        document.getElementById('xp-fill').style.width = (data.xp || 0) + "%";
+    async function renderUI(globalQuests = []) {
+        document.getElementById('level-label').innerText = "Seviye " + (userStats.level || 1);
+        document.getElementById('xp-label').innerText = (userStats.xp || 0) + "% XP";
+        document.getElementById('xp-fill').style.width = (userStats.xp || 0) + "%";
         
-        const isOnCooldown = checkCooldown(data);
         const list = document.getElementById('quest-list');
         list.innerHTML = "";
+
+        // Global görevleri listele
+        const qList = globalQuests.length > 0 ? globalQuests : (await getDoc(doc(db, "global_settings", "quests")))?.data()?.list || [];
         
-        (data.quests || []).forEach((q) => {
+        const now = Date.now();
+        const cooldownActive = (now - (userStats.lastFinish || 0)) < (24 * 60 * 60 * 1000);
+
+        qList.forEach(q => {
+            const isDone = (userStats.completedGlobal || []).includes(q);
             const div = document.createElement('div');
             div.className = 'quest-item';
-            div.innerHTML = `<span>${q}</span> 
-                <button class="btn-finish" ${isOnCooldown ? 'disabled' : ''} onclick="finishQuest('${q}')">
-                    ${isOnCooldown ? 'BEKLE' : 'BİTİR'}
-                </button>`;
+            div.innerHTML = `
+                <span style="${isDone ? 'text-decoration: line-through; color:gray;' : ''}">${q}</span>
+                <button onclick="completeGlobal('${q}')" ${isDone || cooldownActive ? 'disabled' : ''}>
+                    ${isDone ? 'BİTTİ' : (cooldownActive ? 'BEKLE' : 'BİTİR')}
+                </button>
+            `;
             list.appendChild(div);
         });
     }
 
-    // ADMIN: GÖREV EKLEME
-    window.adminAddQuest = async () => {
-        const targetUid = document.getElementById('target-uid').value;
-        const questText = document.getElementById('quest-input').value;
-        if(!targetUid || !questText) return alert("UID ve Görev boş olamaz!");
-
-        const ref = doc(db, "user_stats", targetUid);
-        await updateDoc(ref, { quests: arrayUnion(questText) });
-        alert("Görev başarıyla atandı!");
+    // ADMIN: HERKESE GÖREV YAYINLA
+    window.publishGlobalQuest = async () => {
+        const text = document.getElementById('quest-input').value;
+        if (!text) return;
+        const ref = doc(db, "global_settings", "quests");
+        
+        // Eğer döküman yoksa oluştur, varsa listeye ekle
+        const snap = await getDoc(ref);
+        if (!snap.exists()) {
+            await setDoc(ref, { list: [text] });
+        } else {
+            await updateDoc(ref, { list: arrayUnion(text) });
+        }
+        alert("Görev tüm dünyaya duyuruldu! 🌍");
         document.getElementById('quest-input').value = "";
     };
 
-    // KULLANICI: GÖREV BİTİRME (24 Saat Kuralı)
-    window.finishQuest = async (questText) => {
+    // KULLANICI: GLOBAL GÖREVİ BİTİR
+    window.completeGlobal = async (qName) => {
         const ref = doc(db, "user_stats", auth.currentUser.uid);
-        const snap = await getDoc(ref);
-        const data = snap.data();
-
-        if (checkCooldown(data)) return alert("Henüz 24 saat geçmedi!");
-
-        let newXP = (data.xp || 0) + 20;
-        let newLvl = data.level || 1;
+        let newXP = (userStats.xp || 0) + 20;
+        let newLvl = userStats.level || 1;
         if (newXP >= 100) { newXP = 0; newLvl++; }
 
         await updateDoc(ref, {
-            quests: arrayRemove(questText),
+            completedGlobal: arrayUnion(qName),
             xp: newXP,
             level: newLvl,
-            lastFinish: Date.now() // Zaman damgası vuruyoruz
+            lastFinish: Date.now()
         });
-    };
+    }
 </script>
 </body>
 </html>
