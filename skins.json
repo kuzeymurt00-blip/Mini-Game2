@@ -1,0 +1,626 @@
+[
+  {
+    "name": "Fatihghostsera",
+    "remoteUrl": "fatihghostsera.mdl",
+    "targetName": "v_usp.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/fatihghostsera.png"
+  },
+  {
+    "name": "Phantom",
+    "remoteUrl": "v_2024phantom2.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/phantom.png"
+  },
+  {
+    "name": "Ak",
+    "remoteUrl": "v_ak47.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/ak.png"
+  },
+  {
+    "name": "Anomali Knife",
+    "remoteUrl": "v_anomali_knife.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/anomali_knife.png"
+  },
+  {
+    "name": "Anomali Sherif",
+    "remoteUrl": "v_anomali_sherif2.mdl",
+    "targetName": "v_deagle.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/anomali_sherif.png"
+  },
+  {
+    "name": "Anomali Vandaln",
+    "remoteUrl": "v_anomali_vandaln.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/anomali_vandaln.png"
+  },
+  {
+    "name": "Aomendir Vandal",
+    "remoteUrl": "v_aomendir_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/aomendir_vandal.png"
+  },
+  {
+    "name": "Arcade Phantomm",
+    "remoteUrl": "v_arcade_phantomm.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/arcade_phantomm.png"
+  },
+  {
+    "name": "Ares",
+    "remoteUrl": "v_ares11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/ares.png"
+  },
+  {
+    "name": "Asilbalta Knife",
+    "remoteUrl": "v_asilbalta_knife.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/asilbalta_knife.png"
+  },
+  {
+    "name": "Asil Classic",
+    "remoteUrl": "v_asil_classic.mdl",
+    "targetName": "v_glock18.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/asil_classic.png"
+  },
+  {
+    "name": "Asil Knife",
+    "remoteUrl": "v_asil_knife1.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/asil_knife.png"
+  },
+  {
+    "name": "Asil Phantom",
+    "remoteUrl": "v_asil_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/asil_phantom.png"
+  },
+  {
+    "name": "Ayakashi Knife",
+    "remoteUrl": "v_ayakashi_knife.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/ayakashi_knife.png"
+  },
+  {
+    "name": "Ayakashi Phantom",
+    "remoteUrl": "v_ayakashi_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/ayakashi_phantom.png"
+  },
+  {
+    "name": "Beta Knife",
+    "remoteUrl": "v_beta_knife1.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/beta_knife.png"
+  },
+  {
+    "name": "Blastx Phantom",
+    "remoteUrl": "v_blastx_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/blastx_phantom.png"
+  },
+  {
+    "name": "Bolt Knife",
+    "remoteUrl": "v_bolt_knife1.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/bolt_knife.png"
+  },
+  {
+    "name": "Bucky",
+    "remoteUrl": "v_bucky11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/bucky.png"
+  },
+  {
+    "name": "Bulldog",
+    "remoteUrl": "v_bulldog11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/bulldog.png"
+  },
+  {
+    "name": "Cehennem Vandal",
+    "remoteUrl": "v_cehennem_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/cehennem_vandal.png"
+  },
+  {
+    "name": "Cesuryurek Vandall",
+    "remoteUrl": "v_cesuryurek_vandall.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/cesuryurek_vandall.png"
+  },
+  {
+    "name": "Champ Vandal",
+    "remoteUrl": "v_champ21_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/champ_vandal.png"
+  },
+  {
+    "name": "Champnews Vandal",
+    "remoteUrl": "v_champ23news_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/champnews_vandal.png"
+  },
+  {
+    "name": "Champions",
+    "remoteUrl": "v_champions_2025.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/champions.png"
+  },
+  {
+    "name": "Champ Katana",
+    "remoteUrl": "v_champ_katana.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/champ_katana.png"
+  },
+  {
+    "name": "Champ Knife",
+    "remoteUrl": "v_champ_knife1.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/champ_knife.png"
+  },
+  {
+    "name": "Classic",
+    "remoteUrl": "v_classic11.mdl",
+    "targetName": "v_glock18.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/classic.png"
+  },
+  {
+    "name": "Ejder Op",
+    "remoteUrl": "v_ejder_op2.mdl",
+    "targetName": "v_awp.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/ejder_op.png"
+  },
+  {
+    "name": "Ejder Vandal",
+    "remoteUrl": "v_ejder_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/ejder_vandal.png"
+  },
+  {
+    "name": "Evori Ghost",
+    "remoteUrl": "v_evori_ghost.mdl",
+    "targetName": "v_usp.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/evori_ghost.png"
+  },
+  {
+    "name": "Evori Knife",
+    "remoteUrl": "v_evori_knife1.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/evori_knife.png"
+  },
+  {
+    "name": "Evori Odin",
+    "remoteUrl": "v_evori_odin2.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/evori_odin.png"
+  },
+  {
+    "name": "Evori Vandal",
+    "remoteUrl": "v_evori_vandal2.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/evori_vandal.png"
+  },
+  {
+    "name": "Evrim Vandal",
+    "remoteUrl": "v_evrim_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/evrim_vandal.png"
+  },
+  {
+    "name": "Exo Knife",
+    "remoteUrl": "v_exo_knife1.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/exo_knife.png"
+  },
+  {
+    "name": "Exo Sherif",
+    "remoteUrl": "v_exo_sherif2.mdl",
+    "targetName": "v_deagle.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/exo_sherif.png"
+  },
+  {
+    "name": "Exo Vandal",
+    "remoteUrl": "v_exo_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/exo_vandal.png"
+  },
+  {
+    "name": "Fatih Phantom",
+    "remoteUrl": "v_fatih_phantom2.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/fatih_phantom.png"
+  },
+  {
+    "name": "Faz Knife",
+    "remoteUrl": "v_faz_knife.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/faz_knife.png"
+  },
+  {
+    "name": "Faz Vandal",
+    "remoteUrl": "v_faz_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/faz_vandal.png"
+  },
+  {
+    "name": "Frenzy",
+    "remoteUrl": "v_frenzy11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/frenzy.png"
+  },
+  {
+    "name": "Gaia Vandal",
+    "remoteUrl": "v_gaia_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/gaia_vandal.png"
+  },
+  {
+    "name": "Ghost",
+    "remoteUrl": "v_ghost11.mdl",
+    "targetName": "v_usp.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/ghost.png"
+  },
+  {
+    "name": "Guardian",
+    "remoteUrl": "v_guardian11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/guardian.png"
+  },
+  {
+    "name": "Helix Phantom",
+    "remoteUrl": "v_helix_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/helix_phantom.png"
+  },
+  {
+    "name": "Iyon Vandal",
+    "remoteUrl": "v_iyon_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/iyon_vandal.png"
+  },
+  {
+    "name": "Judge",
+    "remoteUrl": "v_judge11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/judge.png"
+  },
+  {
+    "name": "Kaos Bulldog",
+    "remoteUrl": "v_kaos_bulldog2.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/kaos_bulldog.png"
+  },
+  {
+    "name": "Kaos Phantom",
+    "remoteUrl": "v_kaos_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/kaos_phantom.png"
+  },
+  {
+    "name": "Kaos Sherrif",
+    "remoteUrl": "v_kaos_sherrif.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/kaos_sherrif.png"
+  },
+  {
+    "name": "Kaos Vandal",
+    "remoteUrl": "v_kaos_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/kaos_vandal.png"
+  },
+  {
+    "name": "Knife",
+    "remoteUrl": "v_knife11.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/knife.png"
+  },
+  {
+    "name": "Knife Champions",
+    "remoteUrl": "v_knife_champions25.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/knife_champions.png"
+  },
+  {
+    "name": "Knife Gaia",
+    "remoteUrl": "v_knife_gaia11.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/knife_gaia.png"
+  },
+  {
+    "name": "Kuronami Knife",
+    "remoteUrl": "v_kuronami_knife.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/kuronami_knife.png"
+  },
+  {
+    "name": "Kuronami Marshall",
+    "remoteUrl": "v_kuronami_marshall.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/kuronami_marshall.png"
+  },
+  {
+    "name": "Kuronami Sherif",
+    "remoteUrl": "v_kuronami_sherif2.mdl",
+    "targetName": "v_deagle.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/kuronami_sherif.png"
+  },
+  {
+    "name": "Kuronami Vandal",
+    "remoteUrl": "v_kuronami_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/kuronami_vandal.png"
+  },
+  {
+    "name": "Marshall",
+    "remoteUrl": "v_marshall11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/marshall.png"
+  },
+  {
+    "name": "Neptunv",
+    "remoteUrl": "v_neptunv3.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/neptunv.png"
+  },
+  {
+    "name": "Odin",
+    "remoteUrl": "v_odin11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/odin.png"
+  },
+  {
+    "name": "Oni Katana",
+    "remoteUrl": "v_oni_katana.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/oni_katana.png"
+  },
+  {
+    "name": "Oni Phantom",
+    "remoteUrl": "v_oni_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/oni_phantom.png"
+  },
+  {
+    "name": "Oni Vandal",
+    "remoteUrl": "v_oni_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/oni_vandal.png"
+  },
+  {
+    "name": "Operator",
+    "remoteUrl": "v_operator11.mdl",
+    "targetName": "v_awp.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/operator.png"
+  },
+  {
+    "name": "Operator Yildizbelasi",
+    "remoteUrl": "v_operator_yildizbelasi2.mdl",
+    "targetName": "v_awp.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/operator_yildizbelasi.png"
+  },
+  {
+    "name": "Ora Knife",
+    "remoteUrl": "v_ora_knife.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/ora_knife.png"
+  },
+  {
+    "name": "Ora Vandal",
+    "remoteUrl": "v_ora_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/ora_vandal.png"
+  },
+  {
+    "name": "Origin Bucky",
+    "remoteUrl": "v_origin_bucky.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/origin_bucky.png"
+  },
+  {
+    "name": "Phantom",
+    "remoteUrl": "v_phantom11.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/phantom.png"
+  },
+  {
+    "name": "Phantom Singurality",
+    "remoteUrl": "v_phantom_singurality11.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/phantom_singurality.png"
+  },
+  {
+    "name": "Poncik Sherif",
+    "remoteUrl": "v_poncik_sherif2.mdl",
+    "targetName": "v_deagle.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/poncik_sherif.png"
+  },
+  {
+    "name": "Prime Vandalb",
+    "remoteUrl": "v_prime_vandalb.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/prime_vandalb.png"
+  },
+  {
+    "name": "Protocol Phantomm",
+    "remoteUrl": "v_protocol_phantomm.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/protocol_phantomm.png"
+  },
+  {
+    "name": "Reaver Vandal",
+    "remoteUrl": "v_reaver_vandal11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/reaver_vandal.png"
+  },
+  {
+    "name": "Rgx Kelebek",
+    "remoteUrl": "v_rgx_kelebek6.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/rgx_kelebek.png"
+  },
+  {
+    "name": "Rgx Knife",
+    "remoteUrl": "v_rgx_knife11.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/rgx_knife.png"
+  },
+  {
+    "name": "Rgx Phantom",
+    "remoteUrl": "v_rgx_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/rgx_phantom.png"
+  },
+  {
+    "name": "Rgx Vandal",
+    "remoteUrl": "v_rgx_vandal11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/rgx_vandal.png"
+  },
+  {
+    "name": "Seritetik Sherif",
+    "remoteUrl": "v_seritetik_sherif11.mdl",
+    "targetName": "v_deagle.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/seritetik_sherif.png"
+  },
+  {
+    "name": "Seri Phantom",
+    "remoteUrl": "v_seri_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/seri_phantom.png"
+  },
+  {
+    "name": "Sherrif",
+    "remoteUrl": "v_sherrif11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/sherrif.png"
+  },
+  {
+    "name": "Shorty",
+    "remoteUrl": "v_shorty11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/shorty.png"
+  },
+  {
+    "name": "Sircicek Knife",
+    "remoteUrl": "v_sircicek_knife1.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/sircicek_knife.png"
+  },
+  {
+    "name": "Sircicek Vandal",
+    "remoteUrl": "v_sircicek_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/sircicek_vandal.png"
+  },
+  {
+    "name": "Spectre",
+    "remoteUrl": "v_spectre11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/spectre.png"
+  },
+  {
+    "name": "Spectre Phantom",
+    "remoteUrl": "v_spectre_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/spectre_phantom.png"
+  },
+  {
+    "name": "Spike",
+    "remoteUrl": "v_spike13.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/spike.png"
+  },
+  {
+    "name": "Splashx Vandal",
+    "remoteUrl": "v_splashx_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/splashx_vandal.png"
+  },
+  {
+    "name": "Stinger",
+    "remoteUrl": "v_stinger11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/stinger.png"
+  },
+  {
+    "name": "Ulupence Vandal",
+    "remoteUrl": "v_ulupence_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/ulupence_vandal.png"
+  },
+  {
+    "name": "Vandal",
+    "remoteUrl": "v_vandal11.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/vandal.png"
+  },
+  {
+    "name": "Vct Knife",
+    "remoteUrl": "v_vct_knife1.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/vct_knife.png"
+  },
+  {
+    "name": "Xeno Knife",
+    "remoteUrl": "v_xeno_knife1.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/xeno_knife.png"
+  },
+  {
+    "name": "Yagmaci Karambit",
+    "remoteUrl": "v_yagmaci_karambit.mdl",
+    "targetName": "v_knife.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/yagmaci_karambit.png"
+  },
+  {
+    "name": "Yagmaci Kelebek",
+    "remoteUrl": "v_yagmaci_kelebek.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/yagmaci_kelebek.png"
+  },
+  {
+    "name": "Yagmaci Op",
+    "remoteUrl": "v_yagmaci_op2.mdl",
+    "targetName": "v_awp.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/yagmaci_op.png"
+  },
+  {
+    "name": "Yagmaci Phantom",
+    "remoteUrl": "v_yagmaci_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/yagmaci_phantom.png"
+  },
+  {
+    "name": "Yagmaci Sherif",
+    "remoteUrl": "v_yagmaci_sherif2.mdl",
+    "targetName": "v_deagle.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/yagmaci_sherif.png"
+  },
+  {
+    "name": "Yildiz Vandal",
+    "remoteUrl": "v_yildiz_vandal.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/yildiz_vandal.png"
+  },
+  {
+    "name": "Zifiri Classic",
+    "remoteUrl": "v_zifiri_classic.mdl",
+    "targetName": "v_glock18.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/zifiri_classic.png"
+  },
+  {
+    "name": "Zifiri Phantom",
+    "remoteUrl": "v_zifiri_phantom.mdl",
+    "targetName": "v_m4a1.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/zifiri_phantom.png"
+  },
+  {
+    "name": "W Spike",
+    "remoteUrl": "w_spike.mdl",
+    "targetName": "v_ak47.mdl",
+    "preview": "https://valorant-api.com/v1/displayassets/w_spike.png"
+  }
+]
